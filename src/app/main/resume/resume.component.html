@@ -1,55 +1,118 @@
-<mat-card class="resume-card">
-    <mat-card-header>
-      <mat-card-title>{{ resume.name }}</mat-card-title>
-      <mat-card-subtitle>{{ resume.title }} - {{ resume.location }}</mat-card-subtitle>
-    </mat-card-header>
-  
-    <mat-card-content>
-      <section class="objective">
-        <h3>Objective</h3>
-        <p>{{ resume.objective }}</p>
+<div class="resume-card tracking-container">
+  <!-- This is the transparent overlay that will follow the mouse -->
+  <div class="transparent-overlay"></div>
+
+  <div>
+    <mat-card-title>
+      <!-- Display the typewriter effect for the name -->
+      <h1
+        class="text-6xl font-extrabold uppercase tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-pink-500 to-purple-700"
+      >
+        {{ displayedName }}
+      </h1>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <!-- Display the typewriter effect for the title -->
+      <h2 class="font-bold uppercase">
+        {{ displayedTitle }} - {{ resume.location }}
+      </h2>
+    </mat-card-subtitle>
+  </div>
+
+  <section class="content-layer">
+    <section class="objective my-5 bg-clip-border hover:bg-clip-padding">
+      <h3
+        id="objectiveTitle"
+        class="text-3xl font-bold inline-flex items-baseline self-center"
+      >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="verified icon"
+          fontIcon="verified"
+          class="self-center"
+        ></mat-icon>
+
+        Objective
+      </h3>
+      <!-- Display the typewriter effect for the objective -->
+      <p class="mt-3" id="objectiveDisplay">{{ displayedObjective }}</p>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section class="experience my-5">
+      <h3
+        id="expTitle"
+        class="text-3xl font-bold inline-flex items-baseline self-center"
+      >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="check circle icon"
+          fontIcon="check_circle"
+          class="self-center"
+        ></mat-icon>
+        Experience
+      </h3>
+      <section
+        *ngFor="let job of resume.workExperience; let i = index"
+        class="my-3 experience-child"
+        [id]="i"
+      >
+        <h4 class="text-xl">
+          {{ job.position }} at {{ job.company }} {{ job.location }} ({{
+            job.startDate
+          }}
+          - {{ job.endDate || "Present" }})
+        </h4>
+        <div>
+          <ul>
+            <li *ngFor="let responsibility of job.responsibilities">
+              {{ responsibility }}
+            </li>
+          </ul>
+        </div>
       </section>
-  
-      <mat-divider></mat-divider>
-  
-      <section class="experience">
-        <h3>Experience</h3>
-        <mat-accordion>
-          <mat-expansion-panel *ngFor="let job of resume.workExperience">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{ job.position }} at {{ job.company }}
-              </mat-panel-title>
-              <mat-panel-description>
-                {{ job.location }} ({{ job.startDate }} - {{ job.endDate || 'Present' }})
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <ul>
-              <li *ngFor="let responsibility of job.responsibilities">
-                {{ responsibility }}
-              </li>
-            </ul>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </section>
-  
-      <mat-divider></mat-divider>
-  
-      <section class="education">
-        <h3>Education</h3>
-        <p><strong>{{ resume.education.degree }}</strong></p>
-        <p>{{ resume.education.institution }}</p>
-        <p>Department: {{ resume.education.department }}, GPA: {{ resume.education.GPA }}</p>
-      </section>
-  
-      <mat-divider></mat-divider>
-  
-      <section class="skills">
-        <h3>Skills</h3>
-        <mat-chip-set role="list">
-          <mat-chip *ngFor="let skill of resume.skills.proficientIn">{{ skill }}</mat-chip>
-        </mat-chip-set>
-      </section>
-    </mat-card-content>
-  </mat-card>
-  
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section class="education my-5">
+      <h3 id="educationTitle" class="text-3xl font-bold inline-flex items-baseline self-center">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="school cap icon"
+          fontIcon="school"
+          class="self-center"
+        ></mat-icon>
+        Education
+      </h3>
+      <p class="mt-3">
+        <strong>{{ resume.education.degree }}</strong>
+      </p>
+      <p>{{ resume.education.institution }}</p>
+      <p>
+        Department: {{ resume.education.department }}, GPA:
+        {{ resume.education.GPA }}
+      </p>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section class="skills my-5">
+      <h3 id="skillsTitle" class="text-3xl font-bold inline-flex items-baseline self-center">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="all inclusive icon"
+          fontIcon="all_inclusive"
+          class="self-center"
+        ></mat-icon>
+        Skills
+      </h3>
+      <mat-chip-set role="list" class="mt-3">
+        <mat-chip *ngFor="let skill of resume.skills.proficientIn">{{
+          skill
+        }}</mat-chip>
+      </mat-chip-set>
+    </section>
+  </section>
+</div>
