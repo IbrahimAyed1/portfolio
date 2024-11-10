@@ -1,0 +1,55 @@
+<mat-card class="resume-card">
+    <mat-card-header>
+      <mat-card-title>{{ resume.name }}</mat-card-title>
+      <mat-card-subtitle>{{ resume.title }} - {{ resume.location }}</mat-card-subtitle>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <section class="objective">
+        <h3>Objective</h3>
+        <p>{{ resume.objective }}</p>
+      </section>
+  
+      <mat-divider></mat-divider>
+  
+      <section class="experience">
+        <h3>Experience</h3>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let job of resume.workExperience">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ job.position }} at {{ job.company }}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ job.location }} ({{ job.startDate }} - {{ job.endDate || 'Present' }})
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ul>
+              <li *ngFor="let responsibility of job.responsibilities">
+                {{ responsibility }}
+              </li>
+            </ul>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </section>
+  
+      <mat-divider></mat-divider>
+  
+      <section class="education">
+        <h3>Education</h3>
+        <p><strong>{{ resume.education.degree }}</strong></p>
+        <p>{{ resume.education.institution }}</p>
+        <p>Department: {{ resume.education.department }}, GPA: {{ resume.education.GPA }}</p>
+      </section>
+  
+      <mat-divider></mat-divider>
+  
+      <section class="skills">
+        <h3>Skills</h3>
+        <mat-chip-set role="list">
+          <mat-chip *ngFor="let skill of resume.skills.proficientIn">{{ skill }}</mat-chip>
+        </mat-chip-set>
+      </section>
+    </mat-card-content>
+  </mat-card>
+  
