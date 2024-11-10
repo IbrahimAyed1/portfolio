@@ -29,7 +29,7 @@ export class ResumeComponent {
       'Experienced Front End Developer with 3 years of experience in Software Development. Highly skilled in TS,JS, HTML, CSS,Sass Angular, Git, RxJs, and knowledge of NgRx. Demonstrated ability to work independently and collaboratively in a fast-paced environment. Seeking a Front-End Developer position to utilize my technical knowledge and experience..',
     workExperience: [
       {
-        position: 'Senior Front-End Developer',
+        position: 'Front-End Developer',
         company: 'Integral Solutions',
         location: 'Muscat, Oman',
         startDate: 'January 2023',
